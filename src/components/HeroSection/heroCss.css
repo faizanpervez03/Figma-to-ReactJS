@@ -1,0 +1,11 @@
+.triangle {
+  background: #F6339A;
+  transform: rotate(45deg);
+}
+
+
+.triangle-outline{
+     border: 2px solid #F6339A;
+  background: transparent;
+  transform: rotate(45deg);
+}
