@@ -1,4 +1,6 @@
 import React from 'react'
+import TrendBelowProducts from './TrendBelowProducts/TrendBelowProducts'
+import RightTrendProducts from './TrendBelowProducts/RightTrendProducts'
 
 const TrendingProduct = () => {
 
@@ -37,8 +39,9 @@ const TrendingProduct = () => {
 
 
 
-      
+
     ]
+
 
 
     return (
@@ -94,9 +97,45 @@ const TrendingProduct = () => {
                         )
                     })}
                 </div>
-                    {/* lower trending section start shoo */}
+                {/* lower trending section start shoo */}
+                <div className=' !p-2 flex flex-wrap   sm:w-[68%] gap-8 place-items-center !mx-auto  !mt-8'>
+                    <TrendBelowProducts
+                        bgColor="bg-[#FFF6FB]"
+                        title="23% off in all products"
+                        btn="Shop Now"
+                        image="./images/trend-image-1.png"
+                        imgSize="w-44"
+                    />
+                    <TrendBelowProducts
+                        bgColor="bg-[#EEEFFB]"
+                        title="23% off in all products"
+                        btn="View Collections"
+                        image="./images/trend-image-2.png"
+                        imgSize="w-72"
+                    />
+                    <div className='!-mt-8'>
+                        <RightTrendProducts
+                        image="./images/trend-image-4.png"
+                        para="Executive Seat chair"
+                        price="$32.00"
+                        
+                        />
+                        <RightTrendProducts
+                        image="./images/trend-image-5.png"
+                        para="Executive Seat chair"
+                        price="$32.00"
+                        />
+                        <RightTrendProducts
+                        image="./images/trend-image-5.png"
+                        para="Executive Seat chair"
+                        price="$32.00"
+                        />
+                    </div>
+                    
 
-                     
+                </div>
+
+
             </div>
 
         </>

@@ -6,6 +6,10 @@ import LatestProduct from '../components/LastestSection/LatestProduct'
 import OfferSection from '../components/OfferSection/OfferSection'
 import UniqueProduct from '../components/UniqueProduct'
 import TrendingProduct from '../components/TrendingProduct'
+import DiscountItem from '../components/DiscountItem'
+import TopCategory from '../components/TopCategory'
+import NewsletterSection from '../components/NewsletterSection'
+import LatestBlog from '../components/LatestBlog'
 
 const Home = () => {
   return (
@@ -17,6 +21,10 @@ const Home = () => {
      <OfferSection />
      <UniqueProduct />
      <TrendingProduct />
+     <DiscountItem />
+     <TopCategory />
+     <NewsletterSection />
+     <LatestBlog />
     </>
   )
 }

@@ -8,15 +8,15 @@ const LatestProductCard = ({ image, title, price, discount, saleImage }) => {
         <>
 
             <div className="w-92   !max-w-lg !mx-auto !mb-26 group  ">
-               
+
                 <div className="bg-white shadow-sm rounded-sm overflow-hidden relative">
-                     <div className='flex flex-col absolute top-34 left-4  gap-4 opacity-0 group-hover:opacity-100'>
+                    <div className='flex flex-col absolute top-34 left-4  gap-4 opacity-0 group-hover:opacity-100'>
 
-                    <button className='text-[#3b27c7] hover:bg-gray-300 hover:rounded-2xl !p-1 cursor-pointer'><FiShoppingCart /></button>
-                    <button className='text-[#3b27c7] hover:bg-gray-300 hover:rounded-2xl !p-1 cursor-pointer'><FaRegHeart /></button>
-                    <button className='text-[#3b27c7] hover:bg-gray-300 hover:rounded-2xl !p-1 cursor-pointer'><RiZoomInLine /></button>
+                        <button className='text-[#3b27c7] hover:bg-gray-300 hover:rounded-2xl !p-1 cursor-pointer'><FiShoppingCart /></button>
+                        <button className='text-[#3b27c7] hover:bg-gray-300 hover:rounded-2xl !p-1 cursor-pointer'><FaRegHeart /></button>
+                        <button className='text-[#3b27c7] hover:bg-gray-300 hover:rounded-2xl !p-1 cursor-pointer'><RiZoomInLine /></button>
 
-                </div>
+                    </div>
                     <div>
                         <img src={saleImage} alt="" className='absolute w-18  top-2 left-6' />
                     </div>
