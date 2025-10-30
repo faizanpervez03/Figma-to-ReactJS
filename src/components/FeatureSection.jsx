@@ -2,7 +2,7 @@ import React from 'react'
 import Card from './HeroSection/Card'
 
 
-const FeatureSection = () => {
+const FeatureSection = ({about_title}) => {
   return (
     <>
       <div className="main !mt-16   !mx-auto">
