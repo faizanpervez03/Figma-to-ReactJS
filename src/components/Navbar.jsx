@@ -3,7 +3,7 @@ import { FaEnvelope, FaPhoneAlt, FaHeart, FaShoppingCart, FaBars, FaTimes, FaUse
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
 import { FiPhoneCall } from "react-icons/fi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { selectCartCount } from '../store/cartSlice'
 
@@ -12,6 +12,16 @@ import { selectCartCount } from '../store/cartSlice'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const cartCount = useSelector(selectCartCount)
+  const [searchTerm, setSearchTerm] = useState('')
+  const navigate = useNavigate()
+
+  const doSearch = (e) => {
+    if (e && e.preventDefault) e.preventDefault()
+    const q = (searchTerm || '').trim()
+    if (q) navigate(`/products?q=${encodeURIComponent(q)}`)
+    else navigate('/products')
+    setIsOpen(false)
+  }
 
   return (
     <>
@@ -112,13 +122,18 @@ const Navbar = () => {
 
             </nav>
             <div className=" hidden lg:flex">
-              <input
-                type="text"
-                className="border w-3xs border-gray-300 px-2 py-1 outline-none"
-              />
-              <button className="bg-pink-500 text-2xl text-white flex items-center justify-end px-3" style={{ padding: "5px", paddingLeft: "15px" }}>
-                <IoSearchOutline />
-              </button>
+              <form onSubmit={doSearch} className="flex items-center">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search products..."
+                  className="border w-3xs border-gray-300 px-2 py-1 outline-none"
+                />
+                <button type="submit" className="bg-pink-500 text-2xl text-white flex items-center justify-end px-3" style={{ padding: "5px", paddingLeft: "15px" }}>
+                  <IoSearchOutline />
+                </button>
+              </form>
             </div>
             <button className='lg:hidden text-2xl text-gray-700' onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <FaTimes className='text-pink-500' /> : <FaBars className='text-pink-500' />}
@@ -174,14 +189,18 @@ const Navbar = () => {
 
               {/* Mobile Search */}
               <div className="flex mt-4">
-                <input
-                  type="text"
-                  className="border w-full border-gray-300 px-2 py-1 outline-none"
-                  placeholder="Search..."
-                />
-                <button className="bg-pink-500 text-2xl text-white flex items-center justify-center px-3">
-                  <IoSearchOutline />
-                </button>
+                <form onSubmit={doSearch} className="flex w-full">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="border w-full border-gray-300 px-2 py-1 outline-none"
+                    placeholder="Search..."
+                  />
+                  <button type="submit" className="bg-pink-500 text-2xl text-white flex items-center justify-center px-3">
+                    <IoSearchOutline />
+                  </button>
+                </form>
               </div>
             </nav>
           </div>

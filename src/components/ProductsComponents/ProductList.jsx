@@ -1,35 +1,28 @@
 import React from "react";
 import { FaShoppingCart, FaHeart, FaSearch } from "react-icons/fa";
-import { products } from "../../productsData/products";
 import { FiShoppingCart } from "react-icons/fi";
-import { Link } from "react-router";
-const ProductList = () => {
+import { Link } from "react-router-dom";
+
+const ProductList = ({ products }) => {
+    const list = products || [];
     return (
         <div className="flex flex-col gap-6">
-           
-                {products.map((product) => (
-                      <Link to={`/productDetail/${product.id}`} >
+                {list.map((product) => (
+                      <Link to={`/productDetail/${product.id}`} key={product.id}>
                     <div
-                        key={product.id}
                         className="flex flex-col sm:flex-row items-center gap-6 !p-4  shadow-sm hover:shadow-md transition"
                     >
-                       
                         <img
                             src={product.image}
                             alt={product.title}
-                            className="
-             rounded-lg"
+                            className="rounded-lg"
                         />
-                      
 
                         <div className="flex flex-col flex-1">
 
                             <div className="flex gap-4">
-
-
                                 <h3 className="text-lg font-semibold text-[#1A0B5B]">
                                     {product.title}
-
                                 </h3>
 
                                 <div className="flex justify-center gap-2 !mt-2">
@@ -42,7 +35,6 @@ const ProductList = () => {
                                     ))}
                                 </div>
                             </div>
-
 
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="text-[#1A0B5B] font-semibold">
@@ -67,7 +59,6 @@ const ProductList = () => {
                     </div>
                       </Link>
                 ))}
-            
         </div>
     );
 };

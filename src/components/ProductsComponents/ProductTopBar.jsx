@@ -1,7 +1,7 @@
 import React from "react";
 import { FaThLarge, FaList } from "react-icons/fa";
 
-const ProductTopBar = ({ viewType, setViewType }) => {
+const ProductTopBar = ({ viewType, setViewType, searchTerm, setSearchTerm }) => {
   return (
     <div className="sm:w-full flex flex-wrap items-center justify-between !pb-3 !mb-4 !mt-12">
       {/* Left Section */}
@@ -67,6 +67,8 @@ const ProductTopBar = ({ viewType, setViewType }) => {
         <input
           type="text"
           placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="border border-gray-300 !px-2 !py-1 w-36 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         />
       </div>
