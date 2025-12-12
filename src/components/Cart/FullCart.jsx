@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import CartTotal from "./CartTotal";
 import CalculateShipping from "./CalculateShipping";
 import { IoClose } from "react-icons/io5";
+import { useSelector, useDispatch } from 'react-redux'
+import { selectCartItems, increaseQty as increaseAction, decreaseQty as decreaseAction, removeFromCart as removeAction, clearCart as clearAction } from '../../store/cartSlice'
 
 
 
@@ -15,81 +17,12 @@ import { IoClose } from "react-icons/io5";
 
 
 const FullCart = () => {
-
-  
-const cartItems = [
-  {
-    id: 1,
-    name: "Ut diam consequat",
-    color: "Brown",
-    size: "XL",
-    price: 32.0,
-    image: "./images/cart-1.png",
-    total: 219.0,
-  },
-  {
-    id: 2,
-    name: "Vel faucibus posuere",
-    color: "Brown",
-    size: "XL",
-    price: 32.0,
-    image: "./images/cart-2.png",
-    total: 219.0,
-  },
-  {
-    id: 3,
-    name: "Ac vitae vestibulum",
-    color: "Brown",
-    size: "XL",
-    price: 32.0,
-    image: "./images/cart-3.png",
-    total: 219.0,
-  },
-  {
-    id: 4,
-    name: "Eti massa diam",
-    color: "Brown",
-    size: "XL",
-    price: 32.0,
-    image: "./images/cart-4.png",
-    total: 219.0,
-  },
-  {
-    id: 5,
-    name: "Proin pharetra elementum",
-    color: "Brown",
-    size: "XL",
-    price: 32.0,
-    image: "./images/cart-5.png",
-    total: 219.0,
-  },
-];
-
-
-// Create a separate quantity for each product
-  const [quantities, setQuantities] = useState(
-    cartItems.reduce((acc, item) => {
-      acc[item.id] = 0; // default quantity = 1 for each
-      return acc;
-    }, {})
-  );
-
-  // Increase quantity of specific item
-  const increase = (id) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: prev[id] + 1,
-    }));
-  };
-
-  // Decrease quantity of specific item
-  const decrease = (id) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: prev[id] > 0 ? prev[id] - 1 : 0,
-    }));
-  };
-
+  const dispatch = useDispatch()
+  const cartItems = useSelector(selectCartItems)
+  const increaseQty = (id) => dispatch(increaseAction(id))
+  const decreaseQty = (id) => dispatch(decreaseAction(id))
+  const removeFromCart = (id) => dispatch(removeAction(id))
+  const clearCart = () => dispatch(clearAction())
 
   return (
     <div className=" container sm:max-w-7xl !mx-auto !px-4 !py-10 grid grid-cols-1 lg:grid-cols-3 gap-6 !mb-14">
@@ -109,7 +42,7 @@ const cartItems = [
           >
             <div className="flex items-center gap-4 w-1/2 relative">
               <span className="absolute left-14 cursor-pointer top-2 sm:-top-2 bg-black rounded-2xl ">
-                <IoClose className="text-white" />
+                <IoClose className="text-white" onClick={() => removeFromCart(item.id)} />
               </span>
               <img
                 src={item.image}
@@ -128,16 +61,16 @@ const cartItems = [
              {/* Quantity */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => decrease(item.id)}
+              onClick={() => decreaseQty(item.id)}
               className="bg-gray-200 text-gray-700 !px-2 rounded hover:bg-gray-300"
             >
               −
             </button>
             <span className="text-lg font-semibold w-6 text-center">
-              {quantities[item.id]}
+              {item.quantity || 1}
             </span>
             <button
-              onClick={() => increase(item.id)}
+              onClick={() => increaseQty(item.id)}
               className="bg-gray-200 text-gray-700 !px-2 rounded hover:bg-gray-300"
             >
               +
@@ -145,7 +78,7 @@ const cartItems = [
           </div>
 
             <div className="w-1/4 text-right font-semibold text-[#1A0B5B]">
-              £{item.total.toFixed(2)}
+              £{((item.price || 0) * (item.quantity || 1)).toFixed(2)}
             </div>
           </div>
         ))}
@@ -154,7 +87,7 @@ const cartItems = [
           <button className="bg-pink-500 text-white !px-6 !py-2 rounded hover:bg-pink-600">
             Update Cart
           </button>
-          <button className="bg-pink-500 text-white !px-6 !py-2 rounded hover:bg-pink-600">
+          <button onClick={() => clearCart()} className="bg-pink-500 text-white !px-6 !py-2 rounded hover:bg-pink-600">
             Clear Cart
           </button>
         </div>

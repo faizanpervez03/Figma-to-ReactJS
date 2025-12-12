@@ -1,7 +1,9 @@
 import React from 'react'
 import { FaStar, FaRegHeart, FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../../productsData/products';
+import { useDispatch } from 'react-redux'
+import { addToCart as addToCartAction } from '../../store/cartSlice'
 
 const ProductDetailSection = () => {
 
@@ -13,7 +15,15 @@ const ProductDetailSection = () => {
     }
     console.log('product da de' + product);
 
-    return (
+        const navigate = useNavigate()
+        const dispatch = useDispatch()
+
+        const handleAddToCart = () => {
+            dispatch(addToCartAction({ product, quantity: 1 }))
+            navigate('/cart')
+        }
+
+        return (
         <>
             <div>
 
@@ -96,7 +106,7 @@ const ProductDetailSection = () => {
 
                             {/* Buttons */}
                             <div className="flex items-center gap-4 !mt-4">
-                                <button className="  !px-6 !py-2 rounded-full text-[#1A0B5B] ">
+                                <button onClick={handleAddToCart} className="  !px-6 !py-2 rounded-full text-white cursor-pointer bg-purple-500  ">
                                     Add To Cart
                                 </button>
                                 <button className="!p-2  rounded-full hover:bg-gray-100 transition">
@@ -107,7 +117,7 @@ const ProductDetailSection = () => {
                             {/* Categories + Tags */}
                             <div className="text-gray-600 space-y-1 text-sm !mt-4">
                                 <p>
-                                    <span className="font-semibold text-[#1A0B5B] ">Categories:</span> Chair, Furniture
+                                    <span className="font-semibold text-[#1A0B5B] ">Categories:</span> Chair, Furniture 
                                 </p>
                                 <p className='!mt-4'>
                                     <span className="font-semibold text-[#1A0B5B] ">Tags:</span> Home, Decor

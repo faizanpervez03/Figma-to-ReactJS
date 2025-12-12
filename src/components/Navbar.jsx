@@ -4,11 +4,14 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
 import { FiPhoneCall } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { selectCartCount } from '../store/cartSlice'
 
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const cartCount = useSelector(selectCartCount)
 
   return (
     <>
@@ -39,12 +42,16 @@ const Navbar = () => {
                 Wishlist <FaHeart />
               </button>
               <Link to="/cart">
-
-                <button className='cursor-pointer'>
-                  <FaShoppingCart className='text-lg' />
-                  <span className='absolute  top-10 right-2 sm:top-4 sm:right-76   bg-pink-600 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center animate-bounce'>10</span>
-                </button>
-
+                <div className='relative inline-block'>
+                  <button className='cursor-pointer'>
+                    <FaShoppingCart className='text-lg' />
+                  </button>
+                  {cartCount > 0 && (
+                    <span className='absolute -top-2 -right-2 bg-pink-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center'>
+                      {cartCount}
+                    </span>
+                  )}
+                </div>
               </Link>
             </div>
           </div>
