@@ -4,14 +4,19 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
 import { FiPhoneCall } from "react-icons/fi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectCartCount } from '../store/cartSlice'
+import { selectWishlistCount, selectWishlistItems, removeFromWishlist } from '../store/wishlistSlice'
 
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showWishlistPopup, setShowWishlistPopup] = useState(false)
+  const dispatch = useDispatch()
   const cartCount = useSelector(selectCartCount)
+  const wishlistCount = useSelector(selectWishlistCount)
+  const wishlistItems = useSelector(selectWishlistItems)
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
 
@@ -48,9 +53,38 @@ const Navbar = () => {
               <button className="flex items-center gap-1">
                 Login <FaUser />
               </button>
-              <button className="flex items-center gap-1">
-                Wishlist <FaHeart />
-              </button>
+              <div className='relative inline-block'>
+                <button onClick={() => setShowWishlistPopup(!showWishlistPopup)} className='flex items-center gap-1 cursor-pointer'>
+                  Wishlist <FaHeart />
+                </button>
+                {wishlistCount > 0 && (
+                  <span className='absolute -top-2 -right-2 bg-pink-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center'>
+                    {wishlistCount}
+                  </span>
+                )}
+
+                {/* Wishlist Popup */}
+                {showWishlistPopup && wishlistCount > 0 && (
+                  <div className='absolute right-0 top-12 bg-gray-200 rounded-lg shadow-lg !p-4 w-80 z-50 max-h-96 overflow-y-auto'>
+                    <h3 className='text-lg font-semibold text-[#1A0B5B] !mb-4'>My Wishlist</h3>
+                    <div className='flex flex-col gap-3'>
+                      {wishlistItems.map((product) => (
+                        <div key={product.id} className='flex gap-3 border-b !pb-3 hover:bg-gray-50 !p-2 rounded'>
+                          <img src={product.image} alt={product.title} className='w-16 h-16 object-contain rounded' />
+                          <div className='flex-1'>
+                            <p className='text-sm font-semibold text-[#1A0B5B] line-clamp-2'>{product.title}</p>
+                            <p className='text-sm text-pink-600 font-semibold'>${product.price.toFixed(2)}</p>
+                            <button onClick={() => dispatch(removeFromWishlist(product.id))} className='text-xs text-red-500 hover:text-red-700 !mt-1'>Remove</button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <Link to='/wishlist' onClick={() => setShowWishlistPopup(false)} className='!mt-4 block w-full bg-pink-500 text-white text-center !py-2 rounded hover:bg-pink-600 text-sm font-semibold'>
+                      View All Wishlist
+                    </Link>
+                  </div>
+                )}
+              </div>
               <Link to="/cart">
                 <div className='relative inline-block'>
                   <button className='cursor-pointer'>
@@ -128,7 +162,7 @@ const Navbar = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search products..."
-                  className="border w-3xs border-gray-300 px-2 py-1 outline-none"
+                  className="border w-3xs border-gray-300 !px-2 !py-1 outline-none"
                 />
                 <button type="submit" className="bg-pink-500 text-2xl text-white flex items-center justify-end px-3" style={{ padding: "5px", paddingLeft: "15px" }}>
                   <IoSearchOutline />
@@ -194,7 +228,7 @@ const Navbar = () => {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="border w-full border-gray-300 px-2 py-1 outline-none"
+                    className="border w-full border-gray-300 !px-2 !py-4 outline-none"
                     placeholder="Search..."
                   />
                   <button type="submit" className="bg-pink-500 text-2xl text-white flex items-center justify-center px-3">
