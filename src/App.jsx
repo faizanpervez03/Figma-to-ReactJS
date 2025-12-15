@@ -17,6 +17,7 @@ import SingleBlog from './pages/SingleBlog';
 import SingleBlogSection from './components/Blog/SingleBlogSection';
 import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
+import Checkout from './pages/Checkout';
 import OrderCompletion from './pages/OrderCompletion';
 import OrderSummery from './components/CheckoutDetail/CheckoutDetail';
 import CheckoutDetail from './components/CheckoutDetail/CheckoutDetail';
@@ -48,6 +49,7 @@ const App = () => {
         <Route path='/singleBlog/:id' element={<SingleBlogSection />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
         <Route path='/wishlist' element={<Wishlist />}></Route>
+        <Route path='/checkout' element={<Checkout />}></Route>
         <Route path='/orderCompletion' element={<OrderCompletion />}></Route>
         <Route path='/checkoutDetail' element={<CheckoutDetail />}></Route>
         <Route path='/myaccount' element={<MyAccount />}></Route>

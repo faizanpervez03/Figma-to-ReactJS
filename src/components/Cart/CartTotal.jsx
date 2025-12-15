@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { selectCartTotal } from '../../store/cartSlice'
 
 const CartTotal = () => {
+  const navigate = useNavigate()
   const cartTotal = useSelector(selectCartTotal)
 
   return (
@@ -21,7 +23,7 @@ const CartTotal = () => {
       <p className="text-xs text-gray-500 !mt-2 !py-6">
         * Shipping & taxes calculated at checkout
       </p>
-      <button className="w-full !mt-4 bg-green-500 text-white !py-2 rounded hover:bg-green-600">
+      <button onClick={() => navigate('/checkout')} className="w-full !mt-4 bg-green-500 text-white !py-2 rounded hover:bg-green-600">
         Proceed To Checkout
       </button>
     </div>
