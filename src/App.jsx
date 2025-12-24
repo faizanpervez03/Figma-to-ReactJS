@@ -2,9 +2,7 @@ import React from 'react'
 import './index.css';
 
 import Home from './pages/Home'
-// import { Route, Router, Routes } from 'react-router';
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import Footer from './components/Footer';
@@ -19,11 +17,16 @@ import Cart from './pages/Cart';
 import Wishlist from './pages/Wishlist';
 import Checkout from './pages/Checkout';
 import OrderCompletion from './pages/OrderCompletion';
-import OrderSummery from './components/CheckoutDetail/CheckoutDetail';
 import CheckoutDetail from './components/CheckoutDetail/CheckoutDetail';
 import MyAccount from './pages/MyAccount';
 import Error404 from './pages/Error404';
 import Faqs from './pages/Faqs';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminProducts from './pages/AdminProducts';
+import AdminProductForm from './pages/AdminProductForm';
+import AdminOrders from './pages/AdminOrders';
+import AdminCustomers from './pages/AdminCustomers';
+import AdminReports from './pages/AdminReports';
 
 
 
@@ -32,36 +35,48 @@ import Faqs from './pages/Faqs';
 
 const App = () => {
   return (
-    <>
-   
-
     <Router>
-      <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/products' element={<Products />}></Route>
-        <Route path='/blog' element={<Blog />}></Route>
-        <Route path='/shop' element={<Shop />}></Route>
-        <Route path='/contact' element={<Contact />}></Route>
-        <Route path='/productDetail/:id' element={<ProductDetail />} ></Route>
-        <Route path='/singleBlog' element={<SingleBlog />}></Route>
-        <Route path='/singleBlog/:id' element={<SingleBlogSection />}></Route>
-        <Route path='/cart' element={<Cart />}></Route>
-        <Route path='/wishlist' element={<Wishlist />}></Route>
-        <Route path='/checkout' element={<Checkout />}></Route>
-        <Route path='/orderCompletion' element={<OrderCompletion />}></Route>
-        <Route path='/checkoutDetail' element={<CheckoutDetail />}></Route>
-        <Route path='/myaccount' element={<MyAccount />}></Route>
-        <Route path='/404' element={<Error404 />}></Route>
-        <Route path='/faqs' element={<Faqs />}></Route>
+        {/* Admin routes - no navbar/footer */}
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin/products' element={<AdminProducts />} />
+        <Route path='/admin/products/new' element={<AdminProductForm />} />
+        <Route path='/admin/products/:id/edit' element={<AdminProductForm />} />
+        <Route path='/admin/orders' element={<AdminOrders />} />
+        <Route path='/admin/customers' element={<AdminCustomers />} />
+        <Route path='/admin/reports' element={<AdminReports />} />
 
-      
+        {/* Public routes - with navbar/footer */}
+        <Route element={<LayoutWithNavFooter />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/blog' element={<Blog />} />
+          <Route path='/shop' element={<Shop />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/productDetail/:id' element={<ProductDetail />} />
+          <Route path='/singleBlog' element={<SingleBlog />} />
+          <Route path='/singleBlog/:id' element={<SingleBlogSection />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/wishlist' element={<Wishlist />} />
+          <Route path='/checkout' element={<Checkout />} />
+          <Route path='/orderCompletion' element={<OrderCompletion />} />
+          <Route path='/checkoutDetail' element={<CheckoutDetail />} />
+          <Route path='/myaccount' element={<MyAccount />} />
+          <Route path='/404' element={<Error404 />} />
+          <Route path='/faqs' element={<Faqs />} />
+        </Route>
       </Routes>
-      <Footer />
     </Router>
+  )
+}
 
-
+const LayoutWithNavFooter = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
   )
 }
