@@ -88,7 +88,7 @@ const OrderCompletion = () => {
                             {orderItems && orderItems.map((item) => (
                                 <div key={item.id} className="flex justify-between text-sm">
                                     <span className="text-gray-600">{item.title} x {item.quantity}</span>
-                                    <span className="text-[#1A0B5B] font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                                    <span className="text-[#1A0B5B] font-semibold">Rs {(item.price * item.quantity).toFixed(2)}</span>
                                 </div>
                             ))}
                         </div>
@@ -96,7 +96,7 @@ const OrderCompletion = () => {
                         {/* Total */}
                         <div className="flex justify-between text-lg font-bold">
                             <span className="text-[#1A0B5B]">Order Total:</span>
-                            <span className="text-pink-600">${orderTotal.toFixed(2)}</span>
+                            <span className="text-pink-600">Rs {orderTotal.toFixed(2)}</span>
                         </div>
                     </div>
 

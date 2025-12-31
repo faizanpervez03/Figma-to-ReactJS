@@ -20,7 +20,7 @@ const UniqueProduct = () => {
                             <button className='bg-pink-500 text-white shadow-gray shadow-lg cursor-pointer' style={{ padding: "10px 20px ", }}>Add To Cart</button>
                             <div className='text-[#1A0B5B]'>
                                 <p><span className='font-semibold'> B&B</span> Italian Sofa</p>
-                                <p>$32.00</p>
+                                <p>Rs 32</p>
                             </div>
                         </div>
                     </div>

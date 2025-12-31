@@ -6,14 +6,14 @@ const RelatedProduct = () => {
         {
             id: 1,
             title: "Mens Fashion Wear",
-            price: "$43.00",
+            price: "Rs 43",
             rating: 5,
             image: "/images/Products-images/product-7.png",
         },
         {
             id: 2,
             title: "Women's Fashion",
-            price: "$67.00",
+            price: "Rs 67",
             rating: 5,
 
             image: "/images/Products-images/product-8.png",
@@ -21,7 +21,7 @@ const RelatedProduct = () => {
         {
             id: 3,
             title: "Wolx Dummy Fashion",
-            price: "$67.00",
+            price: "Rs 67",
             rating: 4,
 
             image: "/images/Products-images/product-9.png",
@@ -29,7 +29,7 @@ const RelatedProduct = () => {
         {
             id: 4,
             title: "Top Wall Digital Clock",
-            price: "$51.00",
+            price: "Rs 51",
             rating: 4,
 
             image: "/images/Products-images/product-10.png",

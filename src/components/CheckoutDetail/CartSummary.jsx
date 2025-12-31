@@ -21,7 +21,7 @@ const CartSummary = () => {
               <p className="text-sm text-gray-500">Size: {item.size}</p>
             </div>
           </div>
-          <p className="text-gray-700 font-medium">${item.price.toFixed(2)}</p>
+          <p className="text-gray-700 font-medium">Rs {item.price.toFixed(2)}</p>
         </div>
       ))}
     </div>

@@ -35,7 +35,13 @@ const FullCart = () => {
           <span className="w-1/4 text-right">Total</span>
         </div>
 
-        {cartItems.map((item) => (
+        {cartItems.map((item) => {
+          // Ensure price is a number
+          const numPrice = typeof item.price === 'string' 
+            ? parseFloat(item.price.replace('Rs', '').replace('$', '').trim()) 
+            : (item.price || 0)
+          
+          return (
           <div
             key={item.id}
             className="flex justify-between items-center border-b border-gray-300 !py-4"
@@ -50,13 +56,13 @@ const FullCart = () => {
                 className="w-16 h-16 object-cover rounded"
               />
               <div>
-                <h3 className="font-semibold ">{item.name}</h3>
+                <h3 className="font-semibold ">{item.name || item.title}</h3>
                 <p className="text-sm text-gray-500">Color: {item.color}</p>
                 <p className="text-sm text-gray-500">Size: {item.size}</p>
               </div>
             </div>
 
-            <div className="w-1/4 text-center text-[#1A0B5B]">${item.price.toFixed(2)}</div>
+            <div className="w-1/4 text-center text-[#1A0B5B]">Rs: {numPrice.toFixed(2)}</div>
 
              {/* Quantity */}
           <div className="flex items-center gap-3">
@@ -78,10 +84,11 @@ const FullCart = () => {
           </div>
 
             <div className="w-1/4 text-right font-semibold text-[#1A0B5B]">
-              £{((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+              Rs: {(numPrice * (item.quantity || 1)).toFixed(2)}
             </div>
           </div>
-        ))}
+          )
+        })}
 
         <div className="flex justify-between !mt-6">
           <button className="bg-pink-500 text-white !px-6 !py-2 rounded hover:bg-pink-600">

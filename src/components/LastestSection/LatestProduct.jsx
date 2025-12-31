@@ -24,39 +24,39 @@ const LatestProduct = () => {
           <LatestProductCard 
           image="./images/latest01.png"
           title="Comfort Handy Craft"
-          price="$44.00"
-          discount="$65.00"
+          price="Rs 44"
+          discount="Rs 65"
           />
           <LatestProductCard 
           image="./images/latest02.png"
           title="Comfort Handy Craft"
-          price="$44.00"
-          discount="$65.00"
+          price="Rs 44"
+          discount="Rs 65"
           saleImage="./images/sale.png"
           />
           <LatestProductCard 
           image="./images/latest03.png"
           title="Comfort Handy Craft"
-          price="$44.00"
-          discount="$65.00"
+          price="Rs 44"
+          discount="Rs 65"
           />
           <LatestProductCard 
           image="./images/latest04.png"
           title="Comfort Handy Craft"
-          price="$44.00"
-          discount="$65.00"
+          price="Rs 44"
+          discount="Rs 65"
           />
           <LatestProductCard 
           image="./images/latest05.png"
           title="Comfort Handy Craft"
-          price="$44.00"
-          discount="$65.00"
+          price="Rs 44"
+          discount="Rs 65"
           />
           <LatestProductCard 
           image="./images/latest06.png"
           title="Comfort Handy Craft"
-          price="$44.00"
-          discount="$65.00"
+          price="Rs 44"
+          discount="Rs 65"
           />
         </div>
       </div>

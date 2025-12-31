@@ -1,29 +1,83 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaStar, FaRegHeart, FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import { useParams, useNavigate } from 'react-router-dom';
-import { products } from '../../productsData/products';
+import { products as defaultProducts } from '../../productsData/products';
 import { useDispatch } from 'react-redux'
 import { addToCart as addToCartAction } from '../../store/cartSlice'
+
+const API = 'http://localhost:3000/api'
 
 const ProductDetailSection = () => {
 
     const { id } = useParams()
-    const product = products.find((p) => p.id === parseInt(id))
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [product, setProduct] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        fetchProduct()
+    }, [id])
+
+    async function fetchProduct() {
+        try {
+            const res = await fetch(`${API}/products`)
+            const data = await res.json()
+            
+            // Find product by MongoDB _id
+            const foundProduct = data.find((p) => p._id === id)
+            
+            if (foundProduct) {
+                // Map database product to component format
+                const mappedProduct = {
+                    id: foundProduct._id,
+                    title: foundProduct.name,
+                    price: `Rs ${foundProduct.price?.toFixed(2) || '0.00'}`,
+                    oldPrice: `Rs ${(foundProduct.price * 1.5)?.toFixed(2) || '0.00'}`,
+                    image: foundProduct.image ? `http://localhost:3000${foundProduct.image}` : '/images/placeholder.png',
+                    description: foundProduct.description,
+                    category: foundProduct.category,
+                    colors: ['#EEFF61', '#F3559A', '#755BF9'],
+                    countInStock: foundProduct.countInStock,
+                }
+                setProduct(mappedProduct)
+            } else {
+                // Fallback to default products
+                const fallbackProduct = defaultProducts.find((p) => p.id === parseInt(id))
+                setProduct(fallbackProduct)
+            }
+        } catch (err) {
+            console.error('Failed to fetch product:', err)
+            // Fallback to default products
+            const fallbackProduct = defaultProducts.find((p) => p.id === parseInt(id))
+            setProduct(fallbackProduct)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if (loading) {
+        return <div className="text-center text-gray-500 mt-20">Loading...</div>;
+    }
 
     if (!product) {
         return <div className="text-center text-gray-500 mt-20">Product not found</div>;
     }
-    console.log('product da de' + product);
 
-        const navigate = useNavigate()
-        const dispatch = useDispatch()
-
-        const handleAddToCart = () => {
-            dispatch(addToCartAction({ product, quantity: 1 }))
-            navigate('/cart')
+    const handleAddToCart = () => {
+        // Create cart item with numeric price for calculations
+        const cartProduct = {
+            ...product,
+            price: typeof product.price === 'string' 
+                ? parseFloat(product.price.replace('Rs', '').replace('$', '').trim()) 
+                : product.price,
+            name: product.title,
         }
+        dispatch(addToCartAction({ product: cartProduct, quantity: 1 }))
+        navigate('/cart')
+    }
 
-        return (
+    return (
         <>
             <div>
 

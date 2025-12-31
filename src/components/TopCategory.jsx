@@ -7,28 +7,28 @@ const TopCategory = () => {
             id: 1,
             image: "./images/topcategory-1.png",
             title: "Mini LCW Chair",
-            price: "$56.00"
+            price: "Rs 56"
 
         },
         {
             id: 2,
             image: "./images/topcategory-2.png",
             title: "Mini LCW Chair",
-            price: "$56.00"
+            price: "Rs 56"
 
         },
         {
             id: 3,
             image: "./images/topcategory-3.png",
             title: "Mini LCW Chair",
-            price: "$56.00"
+            price: "Rs 56"
 
         },
         {
             id: 4,
             image: "./images/topcategory-1.png",
             title: "Mini LCW Chair",
-            price: "$56.00"
+            price: "Rs 56"
 
         }
     ]

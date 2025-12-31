@@ -64,7 +64,7 @@ const ProductStructure = ({ product }) => {
                     <div className="bg-white p-6 rounded-lg max-w-md" onClick={(e) => e.stopPropagation()}>
                       <img src={product.image} alt={product.title} className="w-full max-h-96 object-contain mb-4" />
                       <h3 className="text-lg font-semibold text-[#1A0B5B] mb-2">{product.title}</h3>
-                      <p className="text-gray-600 mb-4">Price: ${product.price.toFixed(2)}</p>
+                      <p className="text-gray-600 mb-4">Price: Rs{product.price.toFixed(2)}</p>
                       <button onClick={() => setZoomOpen(false)} className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Close</button>
                     </div>
                   </div>
@@ -92,10 +92,10 @@ const ProductStructure = ({ product }) => {
             {/* Price */}
             <div className="flex justify-center items-center gap-2 !mt-2">
                 <span className="text-[#1A0B5B] font-medium">
-                    ${product.price.toFixed(2)}
+                   Rs: {product.price.toFixed(0)}
                 </span>
                 <span className="text-pink-600 line-through text-sm">
-                    ${product.oldPrice.toFixed(2)}
+                    Rs: {product.oldPrice.toFixed(0)}
                 </span>
             </div>
 

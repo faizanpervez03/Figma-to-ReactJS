@@ -62,7 +62,7 @@ const AdminProducts = () => {
                   <tr key={p.id}>
                     <td>{p.image ? <img className="thumbnail" src={`http://localhost:3000${p.image}`} alt="" /> : '-'}</td>
                     <td><strong>{p.name}</strong></td>
-                    <td>${Number(p.price).toFixed(2)}</td>
+                    <td>Rs {Number(p.price).toFixed(2)}</td>
                     <td>{p.countInStock}</td>
                     <td>
                       <div className="actions-group">

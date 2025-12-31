@@ -84,10 +84,10 @@ const Wishlist = () => {
                 {/* Price */}
                 <div className="flex justify-center items-center gap-2 !mt-2">
                   <span className="text-[#1A0B5B] font-medium">
-                    ${product.price.toFixed(2)}
+                    Rs {product.price.toFixed(2)}
                   </span>
                   <span className="text-pink-600 line-through text-sm">
-                    ${product.oldPrice.toFixed(2)}
+                    Rs {product.oldPrice.toFixed(2)}
                   </span>
                 </div>
               </div>

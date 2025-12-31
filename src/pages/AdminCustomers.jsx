@@ -107,7 +107,7 @@ const AdminCustomers = () => {
                           {customer.orderCount}
                         </span>
                       </td>
-                      <td>${customer.totalSpent.toFixed(2)}</td>
+                      <td>Rs {customer.totalSpent.toFixed(2)}</td>
                       <td>{customer.lastOrder ? new Date(customer.lastOrder).toLocaleDateString() : '-'}</td>
                     </tr>
                   ))

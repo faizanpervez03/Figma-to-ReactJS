@@ -47,6 +47,12 @@ export const { addToCart, removeFromCart, increaseQty, decreaseQty, clearCart, s
 
 export const selectCartItems = (state) => state.cart.items
 export const selectCartCount = (state) => state.cart.items.reduce((acc, it) => acc + (it.quantity || 0), 0)
-export const selectCartTotal = (state) => state.cart.items.reduce((acc, it) => acc + (it.price || 0) * (it.quantity || 0), 0)
+export const selectCartTotal = (state) => state.cart.items.reduce((acc, it) => {
+  // Ensure price is a number
+  const numPrice = typeof it.price === 'string' 
+    ? parseFloat(it.price.replace('Rs', '').replace('$', '').trim()) 
+    : (it.price || 0)
+  return acc + (numPrice * (it.quantity || 0))
+}, 0)
 
 export default cartSlice.reducer

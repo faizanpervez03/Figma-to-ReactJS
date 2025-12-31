@@ -112,13 +112,13 @@ const AdminReports = () => {
 
               <div style={{ background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', color: '#fff', padding: 20, borderRadius: 8 }}>
                 <div style={{ fontSize: 12, opacity: 0.9, marginBottom: 8 }}>Total Revenue</div>
-                <div style={{ fontSize: 36, fontWeight: 700 }}>${stats.totalRevenue.toFixed(0)}</div>
+                <div style={{ fontSize: 36, fontWeight: 700 }}>Rs {stats.totalRevenue.toFixed(0)}</div>
                 <div style={{ fontSize: 11, marginTop: 8, opacity: 0.8 }}>Gross sales</div>
               </div>
 
               <div style={{ background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', color: '#fff', padding: 20, borderRadius: 8 }}>
                 <div style={{ fontSize: 12, opacity: 0.9, marginBottom: 8 }}>Avg Order Value</div>
-                <div style={{ fontSize: 36, fontWeight: 700 }}>${stats.avgOrderValue.toFixed(2)}</div>
+                <div style={{ fontSize: 36, fontWeight: 700 }}>Rs {stats.avgOrderValue.toFixed(2)}</div>
                 <div style={{ fontSize: 11, marginTop: 8, opacity: 0.8 }}>Per order</div>
               </div>
 
@@ -164,7 +164,7 @@ const AdminReports = () => {
                       <div key={idx}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                           <span style={{ fontSize: 12, fontWeight: 600, color: '#2d3748' }}>{item.month}</span>
-                          <span style={{ fontSize: 12, color: '#718096' }}>${item.revenue}</span>
+                          <span style={{ fontSize: 12, color: '#718096' }}>Rs {item.revenue}</span>
                         </div>
                         <div style={{ background: '#e2e8f0', height: 6, borderRadius: 3, overflow: 'hidden' }}>
                           <div style={{ background: 'linear-gradient(90deg, #667eea, #764ba2)', height: '100%', width: `${percentage}%` }} />
@@ -193,7 +193,7 @@ const AdminReports = () => {
                     {stats.topProducts.map(p => (
                       <tr key={p.id}>
                         <td><strong>{p.name}</strong></td>
-                        <td>${Number(p.price).toFixed(2)}</td>
+                        <td>Rs {Number(p.price).toFixed(2)}</td>
                         <td>{p.countInStock}</td>
                         <td>{p.category || '-'}</td>
                       </tr>

@@ -73,7 +73,7 @@ const Navbar = () => {
                           <img src={product.image} alt={product.title} className='w-16 h-16 object-contain rounded' />
                           <div className='flex-1'>
                             <p className='text-sm font-semibold text-[#1A0B5B] line-clamp-2'>{product.title}</p>
-                            <p className='text-sm text-pink-600 font-semibold'>${product.price.toFixed(2)}</p>
+                            <p className='text-sm text-pink-600 font-semibold'>Rs {product.price.toFixed(2)}</p>
                             <button onClick={() => dispatch(removeFromWishlist(product.id))} className='text-xs text-red-500 hover:text-red-700 !mt-1'>Remove</button>
                           </div>
                         </div>

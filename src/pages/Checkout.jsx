@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { selectCartItems, selectCartTotal } from '../store/cartSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectCartItems, selectCartTotal, clearCart } from '../store/cartSlice'
 import Breadcrumb from '../components/Breadcrumb'
+
+const API = 'http://localhost:3000/api'
 
 const Checkout = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const cartItems = useSelector(selectCartItems)
   const cartTotal = useSelector(selectCartTotal)
   
@@ -40,19 +43,42 @@ const Checkout = () => {
     setShipping(method === 'standard' ? 10 : method === 'express' ? 20 : 5)
   }
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.address || !formData.country || !formData.city) {
       alert('Please fill in all required fields')
       return
     }
-    
-    navigate('/orderCompletion', {
-      state: {
-        orderData: formData,
-        orderTotal: cartTotal + shipping,
-        orderItems: cartItems,
-      },
-    })
+
+    const payload = {
+      items: cartItems.map(i => ({ id: i.id, title: i.title || i.name || i.productName || '', price: Number(i.price || 0), quantity: i.quantity || 1 })),
+      shippingAddress: formData,
+      shippingPrice: shipping,
+      totalPrice: Number((cartTotal || 0) + shipping),
+      customerEmail: formData.email,
+    }
+
+    try {
+      const res = await fetch(`${API}/orders`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error('Failed to create order')
+      const order = await res.json()
+      // clear cart in store
+      dispatch(clearCart())
+      navigate('/orderCompletion', {
+        state: {
+          orderData: order.shippingAddress || formData,
+          orderTotal: order.totalPrice || payload.totalPrice,
+          orderItems: order.items || payload.items,
+          order,
+        },
+      })
+    } catch (err) {
+      console.error(err)
+      alert('Failed to place order. Please try again.')
+    }
   }
 
   if (cartItems.length === 0) {
@@ -178,7 +204,7 @@ const Checkout = () => {
                     <span className="font-semibold text-[#1A0B5B]">Standard Shipping</span>
                     <p className="text-xs text-gray-500">Delivery in 5-7 business days</p>
                   </span>
-                  <span className="text-pink-600 font-semibold">$10.00</span>
+                  <span className="text-pink-600 font-semibold">Rs:10.00</span>
                 </label>
                 <label className="flex items-center cursor-pointer !p-3 border rounded hover:bg-gray-50">
                   <input
@@ -188,11 +214,8 @@ const Checkout = () => {
                     onChange={() => handleShippingChange('express')}
                     className="mr-3"
                   />
-                  <span className="flex-1">
-                    <span className="font-semibold text-[#1A0B5B]">Express Shipping</span>
-                    <p className="text-xs text-gray-500">Delivery in 2-3 business days</p>
-                  </span>
-                  <span className="text-pink-600 font-semibold">$20.00</span>
+                  <span className="flex-1"></span>
+                    <span className="text-pink-600 font-semibold">Rs 20</span>
                 </label>
                 <label className="flex items-center cursor-pointer !p-3 border rounded hover:bg-gray-50">
                   <input
@@ -206,7 +229,7 @@ const Checkout = () => {
                     <span className="font-semibold text-[#1A0B5B]">Store Pickup</span>
                     <p className="text-xs text-gray-500">Pickup available in 1 business day</p>
                   </span>
-                  <span className="text-pink-600 font-semibold">$5.00</span>
+                  <span className="text-pink-600 font-semibold">Rs 5</span>
                 </label>
               </div>
             </div>
@@ -225,7 +248,7 @@ const Checkout = () => {
                       {item.title.length > 20 ? item.title.substring(0, 20) + '...' : item.title} x {item.quantity}
                     </span>
                     <span className="text-[#1A0B5B] font-semibold">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      Rs {(item.price * item.quantity).toFixed(2)}
                     </span>
                   </div>
                 ))}
@@ -235,15 +258,15 @@ const Checkout = () => {
               <div className="space-y-2 mb-6 border-b !pb-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="text-[#1A0B5B] font-semibold">${cartTotal.toFixed(2)}</span>
+                  <span className="text-[#1A0B5B] font-semibold">Rs {cartTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping:</span>
-                  <span className="text-[#1A0B5B] font-semibold">${shipping.toFixed(2)}</span>
+                  <span className="text-[#1A0B5B] font-semibold">Rs {shipping.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold">
                   <span className="text-[#1A0B5B]">Total:</span>
-                  <span className="text-pink-600">${(cartTotal + shipping).toFixed(2)}</span>
+                  <span className="text-pink-600">Rs {(cartTotal + shipping).toFixed(2)}</span>
                 </div>
               </div>
 

@@ -71,10 +71,10 @@ const ProductList = ({ products }) => {
 
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="text-[#1A0B5B] font-semibold">
-                                    ${product.price}
+                                    Rs {product.price}
                                 </span>
                                 <span className="line-through text-pink-600">
-                                    ${product.oldPrice}
+                                    Rs {product.oldPrice}
                                 </span>
                             </div>
 
@@ -103,7 +103,7 @@ const ProductList = ({ products }) => {
             <div className="bg-white p-6 rounded-lg max-w-md" onClick={(e) => e.stopPropagation()}>
               <img src={zoomProduct.image} alt={zoomProduct.title} className="w-full max-h-96 object-contain mb-4" />
               <h3 className="text-lg font-semibold text-[#1A0B5B] mb-2">{zoomProduct.title}</h3>
-              <p className="text-gray-600 mb-4">Price: ${zoomProduct.price.toFixed(2)}</p>
+              <p className="text-gray-600 mb-4">Price: Rs {zoomProduct.price.toFixed(2)}</p>
               <button onClick={() => setZoomProduct(null)} className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Close</button>
             </div>
           </div>

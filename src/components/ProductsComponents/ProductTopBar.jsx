@@ -1,7 +1,7 @@
 import React from "react";
 import { FaThLarge, FaList } from "react-icons/fa";
 
-const ProductTopBar = ({ viewType, setViewType, searchTerm, setSearchTerm }) => {
+const ProductTopBar = ({ viewType, setViewType, searchTerm, setSearchTerm, resultsCount = 9620, searchSeconds = 0.62 }) => {
   return (
     <div className="sm:w-full flex flex-wrap items-center justify-between !pb-3 !mb-4 !mt-12">
       {/* Left Section */}
@@ -10,7 +10,7 @@ const ProductTopBar = ({ viewType, setViewType, searchTerm, setSearchTerm }) => 
           Ecommerce Accessories & Fashion item
         </h2>
         <p className="text-xs text-gray-400 mt-1">
-          About 9,620 results (0.62 seconds)
+          About {resultsCount.toLocaleString()} results ({searchSeconds.toFixed(2)} seconds)
         </p>
       </div>
 

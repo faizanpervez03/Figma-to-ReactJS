@@ -6,6 +6,7 @@ import { selectCartTotal } from '../../store/cartSlice'
 const CartTotal = () => {
   const navigate = useNavigate()
   const cartTotal = useSelector(selectCartTotal)
+  const total = isNaN(cartTotal) ? 0 : cartTotal
 
   return (
     <div className=" !p-6 bg-[#F4F4FC] shadow-sm">
@@ -14,11 +15,11 @@ const CartTotal = () => {
       </h2>
       <div className="flex justify-between border-b border-gray-300 !pb-2 !mb-2 text-[#1A0B5B]">
         <span>Subtotal:</span>
-        <span>£{cartTotal.toFixed(2)}</span>
+        <span>Rs: {total.toFixed(2)}</span>
       </div>
       <div className="flex justify-between !pb-2 border-b border-gray-300 !py-8 text-[#1A0B5B]">
         <span>Total:</span>
-        <span>£{cartTotal.toFixed(2)}</span>
+        <span>Rs: {total.toFixed(2)}</span>
       </div>
       <p className="text-xs text-gray-500 !mt-2 !py-6">
         * Shipping & taxes calculated at checkout

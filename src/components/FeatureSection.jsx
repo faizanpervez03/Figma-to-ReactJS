@@ -13,28 +13,28 @@ const FeatureSection = ({about_title}) => {
             title="Cantilever chair"
             image="./images/chair01.png"
             code="  Code - Y523201"
-            price="  $42.00"
+            price="  Rs 42"
           />
 
           <Card
             title="Cantilever chair"
             image="./images/chair02.png"
             code="  Code - Y523201"
-            price="  $42.00"
+            price="  Rs 42"
           />
 
           <Card
             title="Cantilever chair"
             image="./images/chair03.png"
             code="  Code - Y523201"
-            price="  $42.00"
+            price="  Rs 42"
           />
 
           <Card
             title="Cantilever chair"
             image="./images/chair04.png"
             code="  Code - Y523201"
-            price="  $42.00"
+            price="  Rs 42"
           />
 
         </div>

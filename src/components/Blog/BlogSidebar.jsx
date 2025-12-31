@@ -83,7 +83,7 @@ const BlogSidebar = () => {
 
       image: "./images/offer-product-1.png",
       title: "Duis lectus est.",
-      price: "$12.00 - $15.00"
+      price: "Rs 12 - Rs 15"
 
     },
 
@@ -91,7 +91,7 @@ const BlogSidebar = () => {
 
       image: "./images/offer-product-2.png",
       title: "Sed placerat..",
-      price: "$12.00 - $15.00"
+      price: "Rs 12 - Rs 15"
 
     },
 
@@ -100,7 +100,7 @@ const BlogSidebar = () => {
 
       image: "./images/offer-product-3.png",
       title: "Netus proin..",
-      price: "$12.00 - $15.00"
+      price: "Rs 12 - Rs 15"
 
     },
 
@@ -109,7 +109,7 @@ const BlogSidebar = () => {
 
       image: "./images/offer-product-4.png",
       title: "Platea in.",
-      price: "$12.00 - $15.00"
+      price: "Rs 12 - Rs 15"
 
     },
 

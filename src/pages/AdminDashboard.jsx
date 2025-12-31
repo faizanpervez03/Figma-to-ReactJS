@@ -48,7 +48,7 @@ const AdminDashboard = () => {
           </div>
           <div style={{ background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', color: '#fff', padding: 20, borderRadius: 8 }}>
             <div style={{ fontSize: 12, opacity: 0.9, marginBottom: 8 }}>Revenue</div>
-            <div style={{ fontSize: 32, fontWeight: 700 }}>${stats.totalRevenue.toFixed(2)}</div>
+            <div style={{ fontSize: 32, fontWeight: 700 }}>Rs{stats.totalRevenue.toFixed(2)}</div>
             <div style={{ fontSize: 12, marginTop: 8, opacity: 0.8 }}>Total sales</div>
           </div>
         </div>
